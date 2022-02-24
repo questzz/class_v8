@@ -1,10 +1,12 @@
 package com.example.myfragment;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -43,7 +45,22 @@ public class OneFragment extends Fragment {
         if(getArguments() != null) {
             String data = getArguments().getString("param1", "");
             Log.d("TAG", "data :" + data);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("알림")
+                    .setMessage("넘겨 받은 데이터 " + data)
+                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // 아무 동작 안함
+                        }
+                    }).setNegativeButton("취소", (dialog, which) -> {
+                        // 아무 동작 안함
+            });
+
+            builder.show();
         }
+
         super.onViewCreated(view, savedInstanceState);
     }
 
